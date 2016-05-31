@@ -5,10 +5,9 @@ def deploy(id) {
         //If there are already docker images with the same name, delete their corresponding containers and then delete them
         sh "[ -z \$(docker images -q 1221-appdeploy-${id}) ] || docker rm \$(docker stop \$(docker ps -a -q --filter ancestor=1221-appdeploy-${id})) || \
             docker rmi 1221-appdeploy-${id}"
-        sh "sleep 20"
         sh "docker build -t 1221-appdeploy-${id} OracleWebLogic/samples/1221-appdeploy-${id}/"
         sh "docker run -d -p 8001:8001 1221-appdeploy-${id}"
-        sh "sleep 30"
+        sh "sleep 50"
 
     }
 

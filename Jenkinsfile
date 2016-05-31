@@ -31,18 +31,11 @@ node {
 stage 'QA'
 node {
     servers = load 'demo/servers.groovy'
-/*    parallel(longerTests: {
+    parallel(longerTests: {
         runTests(servers, 50)
     }, quickerTests: {
         runTests(servers, 20)
     })
-*/
-    longerTests: {
-            runTests(servers, 50)
-    }
-    quickerTests: {
-            runTests(servers, 20)
-    }
 }
 
 stage name: 'Staging', concurrency: 1

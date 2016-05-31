@@ -32,9 +32,9 @@ stage 'QA'
 node {
     servers = load 'demo/servers.groovy'
     parallel(longerTests: {
-        runTests(servers, 50)
+        runTests(servers, 1xxi50)
     }, quickerTests: {
-        runTests(servers, 20)
+        runTests(servers, 2)
     })
 }
 
@@ -47,10 +47,10 @@ stage name: 'Staging', concurrency: 1
 
 stage name: 'Production', concurrency: 1
     node {
-        sh "wget -O - -S ${WLUrl}staging/"
+        sh "wget -O - -S ${WLUrl}/staging/"
         echo 'Production server looks to be alive'
         servers.deploy 'production'
-        echo "Deployed to ${jettyUrl}production/"
+        echo "Deployed to ${jettyUrl}/production/"
     }
 
 def mvn(args) {

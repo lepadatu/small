@@ -9,7 +9,7 @@ def deploy(id) {
         sh "docker ps | grep \".*:8001\" | awk '{print \$1}' | xargs -I {} sh -c \"docker stop {} ; docker rm {}\""
         sh "docker build -t 1221-appdeploy-${id} OracleWebLogic/samples/1221-appdeploy-${id}/"
         sh "docker run -d -p 8001:8001 1221-appdeploy-${id}"
-        sleep(10000)
+        Thread.sleep(10000)
 
     }
 

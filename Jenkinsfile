@@ -32,9 +32,9 @@ stage 'QA'
 node {
     servers = load 'demo/servers.groovy'
     parallel(longerTests: {
-        runTests(servers, 30)
+        runTests(servers, 40)
     }, quickerTests: {
-        runTests(servers, 20)
+        runTests(servers, 30)
     })
 }
 

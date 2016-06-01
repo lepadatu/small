@@ -5,7 +5,7 @@ def servers
 stage 'Prerequisites'
 node {
 	checkout scm
-	/*dir('./OracleJDK/java-8') {
+	dir('./OracleJDK/java-8') {
 	    sh "cp /opt/jre/server-jre-8u92-linux-x64.tar.gz ."
         sh "./build.sh"
     }
@@ -17,7 +17,7 @@ node {
         println "Current dir:"
         sh "pwd"
         sh "docker build --build-arg ADMIN_PASSWORD=luxoftadmin1 -t 1221-domain ."
-    }*/
+    }
 }
 
 stage 'Build'

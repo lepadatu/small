@@ -5,7 +5,7 @@ def servers
 stage 'Prerequisites'
 node {
 	checkout scm
-	/*dir('./OracleJDK/java-8') {
+	dir('./OracleJDK/java-8') {
 	    sh "cp /opt/jre/server-jre-8u92-linux-x64.tar.gz ."
         sh "./build.sh"
     }
@@ -14,10 +14,8 @@ node {
         sh "./buildDockerImage.sh -v 12.2.1 -d"
     }
     dir('./OracleWebLogic/samples/1221-domain') {
-        println "Current dir:"
-        sh "pwd"
         sh "docker build --build-arg ADMIN_PASSWORD=luxoftadmin1 -t 1221-domain ."
-    } */
+    }
 }
 
 stage 'Build'
@@ -31,12 +29,8 @@ node {
 stage 'QA'
 node {
     servers = load 'demo/servers.groovy'
-    parallel(longerTests: {
-        runTests(servers, 30)
-    }, quickerTests: {
-        runTests(servers, 20)
-    })
-}
+    runTests(servers, 30)
+
 
 stage name: 'Staging', concurrency: 1
     node {

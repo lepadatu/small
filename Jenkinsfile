@@ -30,6 +30,7 @@ stage 'QA'
 node {
     servers = load 'demo/servers.groovy'
     runTests(servers, 30)
+    }
 
 
 stage name: 'Staging', concurrency: 1
